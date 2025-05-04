@@ -19,40 +19,42 @@ def parse_todo(natural_text: str) -> TodoCreate:
             model="llama3-70b-8192",
             messages=[{
                     "role": "system",
-                    "content": f"""Convert natural language TODO inputs to JSON with these rules:
+                    "content": f"""Convert natural language TODO inputs to JSON with these STRICT rules:
 
                 1. Structure:
                 {{
                     "task": "Concise title (5-7 words max)",
-                    "description": "Key details from input | null",
+                    "description": "Extracted details from input (MUST include even if brief)",
                     "category": ["work", "personal", "shopping", "other"],
                     "priority": ["low", "medium", "high"],
                     "due_date": "YYYY-MM-DD | null"
                 }}
 
                 2. Examples:
-                Input: "Finish report by Friday with client feedback"
+                Input: "Finish report by Friday"
                 Output: {{
-                    "task": "Finish client report",
-                    "description": "Include client feedback",
+                    "task": "Finish report",
+                    "description": "Complete and submit weekly report",
                     "category": "work",
-                    "priority": "high",
-                    "due_date": "{ (date.today() + timedelta(days=(4 - date.today().weekday()) % 7)).isoformat() }"  # Next Friday
+                    "priority": "medium",
+                    "due_date": "{ (date.today() + timedelta(days=(4 - date.today().weekday()) % 7)).isoformat() }"
                 }}
 
-                Input: "Buy milk and eggs"
+                Input: "Buy milk"
                 Output: {{
-                    "task": "Buy groceries",
-                    "description": "Milk and eggs",
+                    "task": "Buy milk",
+                    "description": "Purchase 2 liters of whole milk",
                     "category": "shopping",
                     "priority": "medium",
                     "due_date": null
                 }}
 
-                3. Current Date: {date.today().isoformat()}
-                4. Handle relative dates ("tomorrow" = +1 day, "next week" = +7 days)
-                5. Omit unspecified fields as null
-                6. Return ONLY valid JSON"""
+                3. Requirements:
+                - Current Date: {date.today().isoformat()}
+                - ALWAYS include description (extract key details from input)
+                - Convert relative dates ("tomorrow" = +1 day)
+                - No markdown, ONLY valid JSON
+                - For minimal inputs, expand description logically"""
                 }, {
                     "role": "user",
                     "content": f"Input: {natural_text}\nOutput:"
