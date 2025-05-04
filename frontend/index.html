@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Todo App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Powered Todo List</h1>
+        <div class="input-section">
+            <input type="text" id="todoInput" 
+                   placeholder="Type your todo in natural language (e.g., 'Buy milk tomorrow high priority')"
+                   autocomplete="off">
+            <button id="actionButton" onclick="addTodo()">Add Todo</button>
+        </div>
+        <div id="todoList"></div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
