@@ -17,7 +17,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="AI-Powered Todo Manager",
     description="API backend for AI-enhanced todo management system",
-    version="1.0.0"
+    version="1.0.3"
 )
 
 """ Static Files Configuration """

@@ -25,7 +25,9 @@ const showNotification = (type, message) => {
 const toggleButtonState = (isLoading) => {
     const btn = document.getElementById('actionButton');
     btn.disabled = isLoading;
-    btn.textContent = isLoading ? (isEditing ? 'Updating...' : 'Adding...') : (isEditing ? 'Update Todo' : 'Add Todo');
+    btn.textContent = isLoading 
+    ? (isEditing ? 'Updating...' : 'Adding...')
+    : (isEditing ? 'Update Todo' : 'Add Todo');
 };
 
 const handleTodoAction = async (action) => {

@@ -8,6 +8,7 @@ from .models import Todo
 
 router = APIRouter()
 
+
 class TodoCreate(BaseModel):
     """Pydantic model for creating a new TODO item.
     
